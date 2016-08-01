@@ -58,7 +58,11 @@ GazeboSonarPlugin::~GazeboSonarPlugin() {
 void GazeboSonarPlugin::Load(sensors::SensorPtr _sensor, sdf::ElementPtr _sdf) {
 
   // Get then name of the parent sensor
+#if GAZEBO_MAJOR_VERSION >= 7
+  sensor_ = std::dynamic_pointer_cast<sensors::RaySensor>(_sensor);
+#else
   sensor_ = boost::dynamic_pointer_cast<sensors::RaySensor>(_sensor);
+#endif
   if (!sensor_)
   {
     gzthrow("GazeboSonarPlugin requires a Ray Sensor as its parent");
@@ -85,7 +89,11 @@ void GazeboSonarPlugin::Load(sensors::SensorPtr _sensor, sdf::ElementPtr _sdf) {
 
   range_.header.frame_id = frame_id_;
   range_.radiation_type = sensor_msgs::Range::ULTRASOUND;
+#if GAZEBO_MAJOR_VERSION >= 7
+  range_.field_of_view = std::min(fabs((sensor_->AngleMax() - sensor_->AngleMin()).Radian()), fabs((sensor_->VerticalAngleMax() - sensor_->VerticalAngleMin()).Radian()));
+#else
   range_.field_of_view = std::min(fabs((sensor_->GetAngleMax() - sensor_->GetAngleMin()).Radian()), fabs((sensor_->GetVerticalAngleMax() - sensor_->GetVerticalAngleMin()).Radian()));
+#endif
   range_.max_range = sensor_->GetRangeMax();
   range_.min_range = sensor_->GetRangeMin();
 
