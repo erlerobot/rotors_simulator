@@ -18,5 +18,14 @@
   <author email="ffurrer@gmail.com">Fadri Furrer</author>
 
   <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>gazebo</build_depend>
+  <run_depend>gazebo_ros</run_depend>
+  
+  <export>
+    <gazebo_ros gazebo_media_path="${prefix}"/>
+  </export>
+  
+
 
 </package>

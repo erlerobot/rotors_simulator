@@ -66,3 +66,7 @@ add_dependencies(rotors_gazebo_octomap_plugin ${catkin_EXPORTED_TARGETS})
 add_library(rotors_gazebo_multirotor_base_plugin src/gazebo_multirotor_base_plugin.cpp)
 target_link_libraries(rotors_gazebo_multirotor_base_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
 add_dependencies(rotors_gazebo_multirotor_base_plugin ${catkin_EXPORTED_TARGETS})
+
+add_library(rotors_gazebo_sonar_plugin src/gazebo_sonar_plugin.cpp)
+target_link_libraries(rotors_gazebo_sonar_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+add_dependencies(rotors_gazebo_sonar_plugin ${catkin_EXPORTED_TARGETS})
